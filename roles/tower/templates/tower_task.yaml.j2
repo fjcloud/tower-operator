@@ -17,6 +17,7 @@ spec:
       labels:
          app: tower-task
     spec:
+      serviceAccountName: tower-task
       containers:
       - image: '{{ tower_task_image }}'
         name: tower-task
