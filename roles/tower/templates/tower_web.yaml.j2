@@ -96,20 +96,3 @@ spec:
     targetPort: 8052
   selector:
     app: tower
-
-# Tower Ingress.
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: '{{ meta.name }}-ingress'
-  namespace: '{{ meta.namespace }}'
-spec:
-  rules:
-  - host: '{{ tower_hostname }}'
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: '{{ meta.name }}-service'
-          servicePort: 80
