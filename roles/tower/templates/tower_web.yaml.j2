@@ -33,6 +33,7 @@ spec:
         name: tower
         ports:
         - containerPort: 8052
+          name: tower-http
         volumeMounts:
           - name: secret-key
             mountPath: /etc/tower/SECRET_KEY
@@ -93,7 +94,8 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: 8052
+    targetPort: tower-http
+    name: webui
   selector:
     app: tower
 
@@ -108,12 +110,13 @@ metadata:
   labels:
     app: '{{ meta.name }}'
 spec:
+  host: '{{ tower_hostname }}'
   to:
     kind: Service
     name: '{{ meta.name }}-service'
     weight: 100
   port:
-    targetPort: 8080
+    targetPort: webui
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: None
