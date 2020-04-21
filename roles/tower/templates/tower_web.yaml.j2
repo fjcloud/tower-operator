@@ -91,8 +91,31 @@ metadata:
     app: tower
 spec:
   ports:
-  - port: 80
+  - port: 8080
     protocol: TCP
     targetPort: 8052
   selector:
     app: tower
+
+
+# Tower route
+
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: '{{ meta.name }}-route'
+  namespace: '{{ meta.namespace }}'
+  labels:
+    app: '{{ meta.name }}'
+spec:
+  host: '{{ tower_hostname }}'
+  to:
+    kind: Service
+    name: '{{ meta.name }}-service'
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
+  wildcardPolicy: None
