@@ -28,6 +28,7 @@ rules:
       - replicasets
       - statefulsets
       - routes
+      - routes/custom
     verbs:
       - '*'
   - apiGroups:
