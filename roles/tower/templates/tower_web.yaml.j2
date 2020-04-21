@@ -108,7 +108,6 @@ metadata:
   labels:
     app: '{{ meta.name }}'
 spec:
-  host: '{{ tower_hostname }}'
   to:
     kind: Service
     name: '{{ meta.name }}-service'
