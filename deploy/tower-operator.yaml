@@ -21,12 +21,13 @@ rules:
   - apiGroups:
       - apps
       - extensions
+      - route.openshift.io
     resources:
       - deployments
       - daemonsets
       - replicasets
       - statefulsets
-      - ingresses
+      - routes
     verbs:
       - '*'
   - apiGroups:
